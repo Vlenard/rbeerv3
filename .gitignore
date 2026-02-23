@@ -4,3 +4,4 @@
 /client/dist
 /out
 /server/.env
+/server/public

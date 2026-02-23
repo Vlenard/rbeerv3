@@ -1,0 +1,14 @@
+<a routerLink="/sign-in">sign-in</a> | <a routerLink="/sign-in">landing</a>
+<br>
+<br>
+<form [formGroup]="signUpGroup" (ngSubmit)="onSubmit()">
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email" class="border-2 ms-2 p-1">
+    <br>
+    <br>
+    <label for="password">password</label>
+    <input id="password" type="text" formControlName="password" class="border-2 ms-2 p-1">
+    <br>
+    <br>
+    <button type="submit">Sign up</button>
+</form>
