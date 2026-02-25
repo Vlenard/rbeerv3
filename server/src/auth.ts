@@ -2,21 +2,24 @@ import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import mongoose from "mongoose";
 
-const port = process.env.PORT || 3000;
+const init = async () => {
+    await mongoose.connect(process.env.MONGO_URI as string)
 
-const auth = betterAuth({
-    //@ts-ignore
-    database: mongodbAdapter(mongoose.connection.db, { client: mongoose.connection.getClient() }),
-    emailAndPassword: {
-        enabled: true
-    },
-    session: {
-        expiresIn: 60 * 60 * 24 * 7, // 7 days
-    },
+    const client = mongoose.connection.getClient()
+    const db = client.db("rbeer")
 
-    trustedOrigins: [`http://localhost:${port}`, "http://localhost:4200"]
-});
+    return betterAuth({
+        database: mongodbAdapter(db, { client }),
+        emailAndPassword: {
+            enabled: true
+        },
+        session: {
+            expiresIn: 60 * 60 * 24 * 7,
+        },
+        trustedOrigins: [`http://localhost:${3000}`, "http://localhost:4200"]
+    })
+};
 
 export default {
-    auth
-};
+    init
+}

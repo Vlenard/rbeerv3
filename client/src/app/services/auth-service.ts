@@ -34,14 +34,14 @@ export class AuthService {
   }
 
   // --- REGISTER ---
-  async sign_up(email: string, password: string): Promise<void> {
+  async signUp(email: string, name: string, password: string): Promise<void> {
     try {
       this._loading.set(true);
 
       await authClient.signUp.email({
         email,
         password,
-        name: ''
+        name
       });
 
       await this.loadSession();
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   // --- LOGIN ---
-  async sign_in(email: string, password: string): Promise<void> {
+  async signIn(email: string, password: string): Promise<void> {
     try {
       this._loading.set(true);
 
@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   // --- LOGOUT ---
-  async sign_out(): Promise<void> {
+  async signOut(): Promise<void> {
     try {
       this._loading.set(true);
 

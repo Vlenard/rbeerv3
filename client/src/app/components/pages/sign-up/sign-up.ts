@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from "@angular/router";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../../services/auth-service';
 
 @Component({
@@ -11,14 +11,43 @@ import { AuthService } from '../../../services/auth-service';
 })
 export class SignUp {
 
-  private auth = inject(AuthService);
+  auth = inject(AuthService);
+  private router = inject(Router);
 
   signUpGroup = new FormGroup({
-    email: new FormControl(""),
-    password: new FormControl("")
+    email: new FormControl<string>("", {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email]
+    }),
+    name: new FormControl<string>("", {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    password: new FormControl<string>("", {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(8)]
+    })
   });
 
-  onSubmit(){
-    console.log("asd");
+  get email() {
+    return this.signUpGroup.controls.email
+  }
+
+  get name() {
+    return this.signUpGroup.controls.name
+  }
+
+  get password() {
+    return this.signUpGroup.controls.password
+  }
+
+  onSubmit() {
+    if (this.signUpGroup.invalid) return;
+
+    const { email, name, password } = this.signUpGroup.getRawValue();
+
+    this.auth.signUp(email, name, password)
+      .then(() => this.router.navigate(["/home"]))
+      .catch(() => console.log("Faild to sign up"));
   }
 }
