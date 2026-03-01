@@ -13,10 +13,6 @@ export class AuthService {
   isAuthenticated = computed(() => !!this._user());
   isLoading = computed(() => this._loading());
 
-  constructor() {
-    this.loadSession();
-  }
-
   // --- SESSION ---
   async loadSession(): Promise<void> {
     try {

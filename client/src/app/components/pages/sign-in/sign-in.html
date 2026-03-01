@@ -1,2 +1,41 @@
 <p>sign-in works!</p>
-<a routerLink="/sign-up">sign-up</a>
+<a routerLink="/sign-up">sign-up</a> | <a routerLink="/">landing</a>
+
+<form [formGroup]="signInGroup" (ngSubmit)="onSubmit()">
+  <br />
+  <br />
+  <label for="email">Email</label>
+  <input id="email" formControlName="email" class="border-2 ms-2 p-1" />
+  @if (email.invalid && (email.dirty || email.touched)) {
+  <div class="alert alert-danger">
+    @if (email.hasError('required')) {
+    <div>Email is required.</div>
+    } @if (email.hasError('email')) {
+    <div>Email formatum is wrong.</div>
+    }
+  </div>
+  }
+  <br />
+  <br />
+  <label for="password">password</label>
+  <input id="password" type="password" formControlName="password" class="border-2 ms-2 p-1" />
+  @if (password.invalid && (password.dirty || password.touched)) {
+  <div class="alert alert-danger">
+    @if (password.hasError('required')) {
+    <div>Name is required.</div>
+    } @if (password.hasError('minlength')) {
+    <div>Password must be at least 8 characters long.</div>
+    }
+  </div>
+  }
+  <br />
+  <br />
+  <button
+    type="submit"
+    class="border-2 border-green-500 disabled:border-red-500"
+    [disabled]="!signInGroup.valid"
+  >
+    Submit
+  </button>
+  @if (auth.isLoading()) { signing in... }
+</form>

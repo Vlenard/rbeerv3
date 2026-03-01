@@ -48,6 +48,5 @@ export class SignUp {
 
     this.auth.signUp(email, name, password)
       .then(() => this.router.navigate(["/home"]))
-      .catch(() => console.log("Faild to sign up"));
   }
 }

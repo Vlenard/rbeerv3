@@ -5,7 +5,7 @@ import { authGuard } from './guards/auth-guard';
 export const routes: Routes = [
     {
         path: "", component: Landing
-    }, 
+    },
     {
         path: "home", canActivate: [authGuard], loadComponent: () => import("./components/pages/home/home").then(m => m.Home)
     },
