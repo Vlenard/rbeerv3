@@ -1,3 +1,5 @@
 import express from "express";
 
-export const beerAPI = express.Router();
+const BeerRoutes = express.Router();
+
+export default BeerRoutes;

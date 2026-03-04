@@ -1,54 +1,48 @@
-import dotenv from 'dotenv';
-import auth from './auth.ts';
+import dotenv from "dotenv";
+import db from "./db.ts";
 import express from "express";
-import { fileURLToPath } from 'node:url';
-import { toNodeHandler } from "better-auth/node";
-import path from 'node:path';
-import cors from "cors";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+import AuthRoutes from "./routes/AuthRoutes.ts";
+import BeerRoutes from "./routes/BeerRoutes.ts";
+import UserRoutes from "./routes/UserRoutes.ts";
+import corsMiddleware from "./middlewares/CorsMiddleware.ts";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const distPath = path.join(__dirname, "../public/browser");
 
 const start = async (): Promise<void> => {
-  const authInstance = await auth.init();
-  // Configure CORS middleware
-  if (process.env.NODE_ENV === "development") {
-    app.use(
-      cors({
-        origin: "http://localhost:4200", // frontend
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true,
-      })
-    );
-  } else {
-    app.use(
-      cors({
-        origin: false, // block every cross origin request
-      })
-    );
-  }
+    // Connect to DB
+    await db.connect();
 
-  app.all("/api/auth/*splat", toNodeHandler(authInstance));
+    // Configure CORS middleware
+    app.use(corsMiddleware);
 
-  app.use(express.json());
+    app.use(express.json());
+    // Serve static files
+    app.use(express.static("public/browser"));
 
-  // app.all("/api/beer/*beer", beerAPI);
+    // Auth routes
+    app.use("/api/auth/", AuthRoutes);
 
-  // Serve static files
-  app.use(express.static("public/browser"));
+    // User routes
+    app.use("/api/user/", UserRoutes);
 
-  // SPA fallback (for client-side routing)
-  app.get("*splat", (req, res) => {
-    res.sendFile(path.join(distPath, "index.html"));
-  });
+    // Beer routes
+    app.use("/api/beer/", BeerRoutes);
 
-  app.listen(port, () => {
-    console.log("Server runs on http://localhost:" + port);
-  });
+    // SPA fallback (for client-side routing)
+    app.get("*splat", (req, res) => {
+        res.sendFile(path.join(distPath, "index.html"));
+    });
+
+    app.listen(port, () => {
+        console.log("Server runs on http://localhost:" + port);
+    });
 };
 
 start();
