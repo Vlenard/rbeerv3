@@ -1,9 +1,13 @@
+/// <reference types="node" />
+
 import mongoose from "mongoose";
 
 const connect = (): Promise<void> =>
     new Promise((resolve) => {
         mongoose
-            .connect(process.env.MONGO_URI as string)
+            .connect(process.env.MONGO_URI as string, {
+                dbName: process.env.MONGO_DB_NAME || "rbeerv3",
+            } as mongoose.ConnectOptions)
             .then(() => {
                 resolve();
             })

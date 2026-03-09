@@ -7,6 +7,8 @@ import AuthRoutes from "./routes/AuthRoutes.ts";
 import BeerRoutes from "./routes/BeerRoutes.ts";
 import UserRoutes from "./routes/UserRoutes.ts";
 import corsMiddleware from "./middlewares/CorsMiddleware.ts";
+import AuthMiddleware from "./middlewares/AuthMiddleware.ts";
+
 
 dotenv.config();
 const app = express();
@@ -32,10 +34,10 @@ const start = async (): Promise<void> => {
     app.use("/api/auth/", AuthRoutes);
 
     // User routes
-    app.use("/api/user/", UserRoutes);
+    app.use("/api/user/", AuthMiddleware, UserRoutes);
 
     // Beer routes
-    app.use("/api/beer/", BeerRoutes);
+    app.use("/api/beer/", AuthMiddleware, BeerRoutes);
 
     // SPA fallback (for client-side routing)
     app.get("*splat", (req, res) => {
