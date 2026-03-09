@@ -22,7 +22,9 @@ const start = async (): Promise<void> => {
     // Configure CORS middleware
     app.use(corsMiddleware);
 
+    // Parse JSON bodies
     app.use(express.json());
+
     // Serve static files
     app.use(express.static("public/browser"));
 
