@@ -7,6 +7,7 @@ const SignIn = async (req: Request, res: Response): Promise<void> => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
+
         if (!user) {
             res.status(400).json({ message: "Invalid email" });
             return;
@@ -17,15 +18,13 @@ const SignIn = async (req: Request, res: Response): Promise<void> => {
         }
 
         const token = jwt.sign(
-            { id: user._id },
+            { id: user._id, name: user.name, email: user.email },
             process.env.AUTH_SECRET || "AJvw41oSr7egeiPskljadflaGBF5BBlU",
             { expiresIn: "1d" },
         );
 
         res.status(200).json({
-            message: "Login successful",
             token,
-            user: { id: user._id, name: user.name, email: user.email },
         });
     } catch (error) {
         res.status(500).json({ message: "Internal server error", error });

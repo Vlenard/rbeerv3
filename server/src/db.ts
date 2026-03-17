@@ -2,7 +2,7 @@
 
 import mongoose from "mongoose";
 
-const connect = (): Promise<void> =>
+const db = (): Promise<void> =>
     new Promise((resolve) => {
         mongoose
             .connect(process.env.MONGO_URI as string, {
@@ -17,6 +17,4 @@ const connect = (): Promise<void> =>
             });
     });
 
-export default {
-    connect,
-};
+export default db;
