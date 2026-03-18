@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { User } from "../../models/User.ts";
 import jwt from "jsonwebtoken";
+import Bearer from "../../services/Bearer.ts";
 
 const SignUp = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -15,11 +16,7 @@ const SignUp = async (req: Request, res: Response): Promise<void> => {
         const newUser = new User({ name, email, password });
         await newUser.save();
 
-        const token = jwt.sign(
-            { id: newUser._id },
-            process.env.AUTH_SECRET || "AJvw41oSr7egeiPskljadflaGBF5BBlU",
-            { expiresIn: "1d" },
-        );
+        const token = Bearer.sign({ id: newUser._id });
 
         res.status(201).json({
             message: "User registered successfully",

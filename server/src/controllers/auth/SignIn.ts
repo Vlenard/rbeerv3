@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { User } from "../../models/User.ts";
-import jwt from "jsonwebtoken";
+import Bearer from "../../services/Bearer.ts";
 
 const SignIn = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -17,11 +17,7 @@ const SignIn = async (req: Request, res: Response): Promise<void> => {
             return;
         }
 
-        const token = jwt.sign(
-            { id: user._id, name: user.name, email: user.email },
-            process.env.AUTH_SECRET || "AJvw41oSr7egeiPskljadflaGBF5BBlU",
-            { expiresIn: "1d" },
-        );
+        const token = Bearer.sign({ id: user._id, name: user.name, email: user.email });
 
         res.status(200).json({
             token,

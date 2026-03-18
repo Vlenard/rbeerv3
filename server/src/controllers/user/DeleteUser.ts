@@ -1,5 +1,5 @@
 import type { Response } from "express";
-import type { AuthorizedRequest } from "../../interfaces/requests/AuthorizedRequest.d.ts";
+import type { AuthorizedRequest } from "../../interfaces/AuthorizedRequest";
 import { User} from "../../models/User.ts";
 
 /*

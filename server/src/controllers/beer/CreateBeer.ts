@@ -1,5 +1,6 @@
 import type { Response } from "express";
-import type { BeerRequest } from "../../interfaces/requests/BeerRequest.d.ts";
+import type { BeerRequest } from "../../interfaces/BeerRequest";
+import type { AuthRequest } from "../../interfaces/AuthRequest";
 import { Beer } from "../../models/Beer.ts";
 
 /*

@@ -1,9 +1,6 @@
 import { Request } from "express";
+import type { UserRequestData } from "./User.d.ts";
 
 export interface AuthorizedRequest extends Request {
-    user: {
-        id: string,
-        name: string,
-        email: string
-    };
+    user: UserRequestData;
 }
