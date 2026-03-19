@@ -9,6 +9,11 @@ export interface IBeer extends Document {
     owner: mongoose.Types.ObjectId;
 }
 
+const transformSchemaOutput = (doc: Document, ret: Record<string, any>) => {
+    const { _id, __v, ...object } = ret;
+    return { id: _id, ...object };
+};
+
 const BeerSchema = new Schema<IBeer>(
     {
         name: {
@@ -44,6 +49,12 @@ const BeerSchema = new Schema<IBeer>(
     },
     {
         timestamps: true,
+        toJSON: {
+            transform: transformSchemaOutput,
+        },
+        toObject: {
+            transform: transformSchemaOutput,
+        },
     },
 );
 

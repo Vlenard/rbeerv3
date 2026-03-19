@@ -3,13 +3,15 @@ import CreateBeer from "../controllers/beer/CreateBeer.ts";
 import DeleteBeer from "../controllers/beer/DeleteBeer.ts";
 import GetBeers from "../controllers/beer/GetBeers.ts";
 import UpdateBeer from "../controllers/beer/UpdateBeer.ts";
+import GetBeer from "../controllers/beer/GetBeer.ts";
 import type { Controller } from "../utils/Types.ts";
-
 const BeerRoutes = express.Router();
 
 BeerRoutes.post("/create", CreateBeer as Controller);
 
 BeerRoutes.get("/", GetBeers as Controller);
+
+BeerRoutes.get("/:id", GetBeer as Controller);
 
 BeerRoutes.delete("/:id", DeleteBeer as Controller);
 
