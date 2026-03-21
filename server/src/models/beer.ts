@@ -1,4 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
+import TransformSchemaOutput from "../services/TransformSchemaOutput.ts";
+
 
 export interface IBeer extends Document {
     name: string;
@@ -8,11 +10,6 @@ export interface IBeer extends Document {
     alcohol: number;
     owner: mongoose.Types.ObjectId;
 }
-
-const transformSchemaOutput = (doc: Document, ret: Record<string, any>) => {
-    const { _id, __v, ...object } = ret;
-    return { id: _id, ...object };
-};
 
 const BeerSchema = new Schema<IBeer>(
     {
@@ -50,10 +47,10 @@ const BeerSchema = new Schema<IBeer>(
     {
         timestamps: true,
         toJSON: {
-            transform: transformSchemaOutput,
+            transform: TransformSchemaOutput,
         },
         toObject: {
-            transform: transformSchemaOutput,
+            transform: TransformSchemaOutput,
         },
     },
 );

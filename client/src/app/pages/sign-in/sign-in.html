@@ -1,0 +1,23 @@
+<div id="sign-in-container">
+  <div>
+    <img id="sign-in-img" src="sign-in.png" alt="sign-in-logo" />
+  </div>
+
+  <div>
+    <form id="sign-in-form" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+      <h2>Sign In</h2>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="varadi@gmail.com" value="" formControlName="email" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Password" formControlName="password" />
+      </mat-form-field>
+      <div>
+        <button matButton="filled" type="submit">Sign In</button>
+      </div>
+      <span>Don't have an account? <a href="/sign-up">Sign Up</a></span>
+    </form>
+  </div>
+</div>

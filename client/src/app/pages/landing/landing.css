@@ -1,0 +1,39 @@
+#landing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+#landing-container div:nth-child(1) {
+  width: 40rem;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 7.5rem;
+}
+
+#landing-container div:nth-child(2) {
+  flex: 1;
+}
+
+#landing-image img {
+  width: 100%;
+  min-width: 30rem;
+  height: auto;
+}
+
+#landing-text h1 {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: .25rem;
+}
+
+#landing-text a:nth-child(1) {
+  margin-right: .75rem;
+}

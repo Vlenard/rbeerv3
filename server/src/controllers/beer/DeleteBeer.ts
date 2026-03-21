@@ -1,6 +1,7 @@
 import type { Response } from "express";
 import type { BeerRequest } from "../../interfaces/BeerRequest";
 import { Beer } from "../../models/Beer.ts";
+import { User } from "../../models/User.ts";
 
 /*
  * Delete a beer by its ID
@@ -12,6 +13,12 @@ const DeleteBeer = async (req: BeerRequest, res: Response): Promise<void> => {
             _id: req.params.id,
             owner: req.user.id,
         });
+
+        if (deletedBeer) {
+            await User.findByIdAndUpdate(req.user.id, {
+                $pull: { beers: deletedBeer._id }
+            });
+        }
 
         if (!deletedBeer) {
             res.status(404)

@@ -10,8 +10,7 @@ const GetUser = async ( req: AuthorizedRequest, res: Response): Promise<void> =>
     try {
         const userId = (req as any).user.id;
         const user = await User.findById(userId)
-            .select("-password")
-            .populate("beers");
+            .select("-password");
 
         if (!user) {
             res.status(404)

@@ -1,0 +1,36 @@
+<div id="sign-up-form-container">
+  <form id="sign-up-form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <h2>Sign Up</h2>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="varadi@gmail.com" value="" formControlName="email" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" placeholder="Varadi" value="" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="text" minlength="6" placeholder="Password" formControlName="password" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="text" placeholder="Confirm Password" formControlName="confirmPassword" />
+    </mat-form-field>
+
+    <div>
+      <button matButton="filled" type="submit" [disabled]="signUpForm.invalid">Sign Up</button>
+    </div>
+    <span>Do you have an account? <a href="/sign-in">Sign In</a></span>
+    @if (signUpForm.errors?.['passwordMismatch']) {
+      <mat-error>Passwords do not match</mat-error>
+    }
+    @if (signUpForm.errors?.['server']) {
+      <mat-error>{{ signUpForm.errors?.['server'] }}</mat-error>
+    }
+  </form>
+</div>

@@ -1,7 +1,7 @@
 import type { Response } from "express";
 import type { BeerRequest } from "../../interfaces/BeerRequest";
-import type { AuthRequest } from "../../interfaces/AuthRequest";
 import { Beer } from "../../models/Beer.ts";
+import { User } from "../../models/User.ts";
 
 /*
  * Create a beer
@@ -12,6 +12,10 @@ const CreateBeer = async (req: BeerRequest, res: Response): Promise<void> => {
         const newBeer = await Beer.create({
             ...req.body,
             owner: req.user.id,
+        });
+
+        await User.findByIdAndUpdate(req.user.id, {
+            $push: { beers: newBeer._id }
         });
 
         res.status(201).json(newBeer).end();

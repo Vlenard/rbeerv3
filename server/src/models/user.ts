@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
+import TransformSchemaOutput from "../services/TransformSchemaOutput.ts";
 
 export interface IUser extends Document {
     email: string;
@@ -31,6 +32,12 @@ const UserSchema = new Schema<IUser>(
     },
     {
         timestamps: true,
+        toJSON: {
+            transform: TransformSchemaOutput,
+        },
+        toObject: {
+            transform: TransformSchemaOutput,
+        },
     },
 );
 
