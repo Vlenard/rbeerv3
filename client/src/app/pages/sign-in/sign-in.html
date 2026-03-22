@@ -15,9 +15,16 @@
         <input matInput type="password" placeholder="Password" formControlName="password" />
       </mat-form-field>
       <div>
-        <button matButton="filled" type="submit">Sign In</button>
+        @if (isLoading) {
+          <mat-spinner diameter="40" ></mat-spinner>
+        } @else {
+          <button matButton="filled" type="submit">Sign In</button>
+        }
       </div>
       <span>Don't have an account? <a href="/sign-up">Sign Up</a></span>
+      @if (signInForm.hasError('invalidCredentials')) {
+        <mat-error>Invalid credentials</mat-error>
+      }
     </form>
   </div>
 </div>

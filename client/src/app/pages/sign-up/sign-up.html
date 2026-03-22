@@ -23,7 +23,11 @@
     </mat-form-field>
 
     <div>
-      <button matButton="filled" type="submit" [disabled]="signUpForm.invalid">Sign Up</button>
+      @if (isLoading) {
+        <mat-spinner diameter="40" ></mat-spinner>
+      } @else {
+        <button matButton="filled" type="submit" [disabled]="signUpForm.invalid">Sign Up</button>
+      }
     </div>
     <span>Do you have an account? <a href="/sign-in">Sign In</a></span>
     @if (signUpForm.errors?.['passwordMismatch']) {

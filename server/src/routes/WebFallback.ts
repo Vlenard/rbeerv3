@@ -12,7 +12,7 @@ const WebFallback = express.Router();
 WebFallback.use(express.static("public/browser"));
 
 // Apply web authentication middleware, excluding sign-in, sign-up, and root paths
-WebFallback.use(WebAuthMiddleware({ excludedPaths: ["/sign-in", "/sign-up", "/"] }));
+WebFallback.use(WebAuthMiddleware({ excludedPaths: ["/sign-in", "/sign-up", "/", "404"] }));
 
 // Handle all other routes by serving the index.html file
 WebFallback.get("*splat", (req, res) => {

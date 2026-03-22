@@ -1,0 +1,50 @@
+<div id="app-layout">
+  <mat-toolbar>
+    <button matIconButton (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>RBeer</span>
+  </mat-toolbar>
+
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer opened mode="side">
+      <div>
+        <a
+          class="nav-btn"
+          routerLink="/app/home"
+          routerLinkActive
+          #rlaApp="routerLinkActive"
+          [matButton]="rlaApp.isActive ? 'tonal' : 'text'"
+        >
+          Home
+        </a>
+
+        <a
+          class="nav-btn"
+          routerLink="/app/beer/new"
+          routerLinkActive
+          #rlaBeer="routerLinkActive"
+          [matButton]="rlaBeer.isActive ? 'tonal' : 'text'"
+        >
+          New beer
+        </a>
+
+        <a
+          class="nav-btn"
+          routerLink="/app/user"
+          routerLinkActive
+          #rlaProfile="routerLinkActive"
+          [matButton]="rlaProfile.isActive ? 'tonal' : 'text'"
+        >
+          User
+        </a>
+      </div>
+
+      <div>
+        <button matButton="filled" (click)="signOut()">Sign out<mat-icon>logout</mat-icon></button>
+      </div>
+    </mat-drawer>
+
+    <router-outlet></router-outlet>
+  </mat-drawer-container>
+</div>

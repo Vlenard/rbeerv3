@@ -2,12 +2,18 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Auth } from '../../../services/auth';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule],
+  imports: [
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.css',
 })
@@ -15,6 +21,7 @@ export class SignUp {
   private authService = inject(Auth);
   private router = inject(Router);
 
+  isLoading = false;
   passwordMismatch = false;
   signUpForm = new FormGroup({
     email: new FormControl<string>('', {
@@ -43,12 +50,14 @@ export class SignUp {
       return;
     }
 
+    this.isLoading = true;
     this.authService.signUp({ email, name, password }).subscribe({
       next: () => {
         this.router.navigate(['/home']);
       },
       error: (err) => {
         this.signUpForm.setErrors({ server: err.error.message });
+        this.isLoading = false;
       },
     });
   }
