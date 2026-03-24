@@ -15,7 +15,7 @@ export class App implements OnInit {
   ngOnInit() {
       if (this.authService.checkAutoSignIn()) {
         if (window.location.pathname === '/sign-in' || window.location.pathname === '/sign-up' || window.location.pathname === '/') {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/app/home']);
         }
       }
     }

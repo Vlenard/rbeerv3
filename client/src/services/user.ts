@@ -16,7 +16,6 @@ export class User {
     this.http.get<User>(this.apiUrl).subscribe({
       next: (userData) => {
         this.#user.set(userData);
-        console.log('User fetched', userData);
       },
       error: (err) => {
         console.error('Failed to load user', err);
