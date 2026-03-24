@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Auth } from '../../../services/auth';
+import { AuthService } from '../../../services/auth-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
   styleUrl: './sign-up.css',
 })
 export class SignUp {
-  private authService = inject(Auth);
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   isLoading = false;

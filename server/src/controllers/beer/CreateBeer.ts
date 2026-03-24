@@ -20,7 +20,7 @@ const CreateBeer = async (req: BeerRequest, res: Response): Promise<void> => {
 
         res.status(201).json(newBeer).end();
     } catch (error: any) {
-        res.status(400).json({ message: error.message, user: req.user }).end();
+        res.status(400).json({ message: error.message }).end();
     }
 };
 

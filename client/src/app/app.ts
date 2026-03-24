@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { Auth } from '../services/auth';
+import { AuthService } from '../services/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { Auth } from '../services/auth';
   styleUrl: './app.css'
 })
 export class App implements OnInit {
-  private authService = inject(Auth);
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   ngOnInit() {

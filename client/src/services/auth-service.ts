@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
-import { User } from './user';
+import { UserService } from './user-service';
 
 interface AuthResponse {
   token: string;
@@ -23,10 +23,10 @@ interface SignInCredentials {
 @Injectable({
   providedIn: 'root',
 })
-export class Auth {
+export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private userService = inject(User);
+  private userService = inject(UserService);
   private readonly TOKEN_KEY = 'auth_token';
   private readonly API_URL = 'http://localhost:3000/api/auth';
 

@@ -4,16 +4,16 @@ import { inject, Injectable, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class User {
+export class UserService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/api/user';
 
-  #user = signal<User | null>(null);
+  #user = signal<UserService | null>(null);
 
   readonly user = this.#user.asReadonly();
 
   fetchUser(): void {
-    this.http.get<User>(this.apiUrl).subscribe({
+    this.http.get<UserService>(this.apiUrl).subscribe({
       next: (userData) => {
         this.#user.set(userData);
       },
@@ -24,8 +24,8 @@ export class User {
     });
   }
 
-  updateUser(updateData: Partial<User>): void {
-    this.http.patch<User>(`${this.apiUrl}/update`, updateData).subscribe({
+  updateUser(updateData: Partial<UserService>): void {
+    this.http.patch<UserService>(`${this.apiUrl}/update`, updateData).subscribe({
       next: (updatedUser) => {
         this.#user.set(updatedUser);
       },

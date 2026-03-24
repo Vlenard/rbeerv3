@@ -4,9 +4,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Auth } from '../../../services/auth';
-import { MatFormField, MatInputModule, MatLabel } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { AuthService } from '../../../services/auth-service';
 
 
 @Component({
@@ -27,7 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class AppLayout {
   private router = inject(Router);
-  private authService = inject(Auth);
+  private authService = inject(AuthService);
 
   signOut() {
     this.authService.signOut();

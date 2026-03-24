@@ -1,0 +1,59 @@
+<div id="beer-container">
+  <div id="beer-header">
+    <div>
+      <button
+        matIconButton
+        [routerLink]="['/app/home']"
+        aria-label="Back to home"
+      >
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <h1>{{ beerForm.value.name }}</h1>
+    </div>
+    <div>
+      <button
+        matIconButton
+        (click)="deleteBeer()"
+        aria-label="Delete beer"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <form id="beer-form" [formGroup]="beerForm" (ngSubmit)="onSubmit()">
+    <div id="beer-content">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name"/>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          @for (type of beerTypes; track type) {
+            <mat-option [value]="type">{{type}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Note</mat-label>
+        <textarea matInput placeholder="Hmm that's beer tastes like..." formControlName="note"></textarea>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Alcohol</mat-label>
+        <input matInput formControlName="alcohol" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Rate</mat-label>
+        <input matInput formControlName="rate" />
+      </mat-form-field>
+      <br />
+      <button matButton="filled" type="submit">Save</button>
+    </div>
+  </form>
+</div>

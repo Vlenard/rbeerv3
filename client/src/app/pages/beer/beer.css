@@ -1,0 +1,56 @@
+#beer-container{
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+
+#beer-header {
+  width: 100%;
+  background-color: rgb(218, 226, 249);
+  border-top-left-radius: 5rem;
+  border-bottom-left-radius: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#beer-header div {
+  display: flex;
+  align-items: center;
+  column-gap: .25rem;
+}
+
+#beer-header div:nth-child(1) {
+  margin-left: 1rem;
+}
+
+#beer-header div:nth-child(2) button {
+  margin-right: 1rem;
+}
+
+#beer-header h1 {
+  width: max-content;
+}
+
+#beer-content {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+}
+
+#beer-form mat-form-field {
+  width: 15rem;
+}
+
+#beer-form mat-form-field:nth-child(1) {
+  margin-right: 1rem;
+}
+
+#beer-form mat-form-field:nth-child(4) {
+  width: 31rem;
+  max-height: 20rem;
+}
+
+#beer-form mat-form-field:nth-child(6) {
+  margin-right: 1rem;
+}

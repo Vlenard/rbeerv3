@@ -6,6 +6,10 @@
       </mat-card-header>
       <mat-card-content>
         <p>{{ beer.note }}</p>
+        <mat-chip-set aria-label="Fish selection">
+          <mat-chip>{{ beer.alcohol }}</mat-chip>
+          <mat-chip>{{ beer.type }}</mat-chip>
+        </mat-chip-set>
       </mat-card-content>
       <mat-card-actions>
         <button matButton [routerLink]="['/app/beer', beer.id]">EDIT</button>
